@@ -47,7 +47,7 @@ for i in range(NUM_PRODUCERS):
 # Creamos y lanzamos los hilos consumidores
 for i in range(NUM_CONSUMERS):
     t = threading.Thread(target=consumer, args=(i,))
-    t.daemon = True
+    t.daemon = True # Permite que el hilo se cierre cuando termine el programa principal
     t.start()
     consumers.append(t)
 
