@@ -61,11 +61,6 @@ echo                ║                                                         
 echo                ╚══════════════════════════════════════════════════════════════════════════════╝
 echo.
 
-:: Poner en pausa la ejecución de comandos del archivo hasta pulsar cualquier tecla
-:: ">nul" -> ocultar texto que sale por defecto
-:: pause>nul
-:: No es necesario lo de arriba
-
 :: MainOpt -> Variable para la opcion del menu principal
 :: set/p -> Asignar valor a la variable
 set /p "MainOpt=‎               INGRESE SU OPCIÓN AQUÍ: "
@@ -154,7 +149,8 @@ for /f "tokens=1,2,3*" %%A in ('dir /a:-d /o:d ^| findstr /r "^[0-9]"') do (
 endlocal
 
 echo                ╚═════════════════════╩═══════════════════╩═════════════════════════════════════════════════╝
-
+echo. 
+echo                -------------------PRESIONE CUALQUIER TECLA PARA IR AL MENÚ PRINCIPAL----------------
 :: Poner en pausa la ejecución de comandos del archivo hasta pulsar cualquier tecla
 :: ">nul" -> ocultar texto que sale por defecto
 pause>nul
@@ -176,9 +172,8 @@ echo.
 echo                 %cd%
 echo.
 
-
-
 set /p "ruta=‎               INGRESE LA RUTA AL CUAL DESEA DIRIGIRSE: "
+
 :: Limpiar pantalla
 cls
 
@@ -200,6 +195,8 @@ goto MainMenu
 :Opt3Menu
 echo.
 echo Escogiste la opción 3
+echo. 
+echo                -------------------PRESIONE CUALQUIER TECLA PARA IR AL MENÚ PRINCIPAL----------------
 
 :: Poner en pausa la ejecución de comandos del archivo hasta pulsar cualquier tecla
 :: ">nul" -> ocultar texto que sale por defecto
@@ -215,6 +212,8 @@ goto MainMenu
 :Opt4Menu
 echo.
 echo Escogiste la opción 4
+echo. 
+echo                -------------------PRESIONE CUALQUIER TECLA PARA IR AL MENÚ PRINCIPAL----------------
 
 :: Poner en pausa la ejecución de comandos del archivo hasta pulsar cualquier tecla
 :: ">nul" -> ocultar texto que sale por defecto
@@ -230,6 +229,8 @@ goto MainMenu
 :Opt5Menu
 echo.
 echo Escogiste la opción 5
+echo. 
+echo                -------------------PRESIONE CUALQUIER TECLA PARA IR AL MENÚ PRINCIPAL----------------
 
 :: Poner en pausa la ejecución de comandos del archivo hasta pulsar cualquier tecla
 :: ">nul" -> ocultar texto que sale por defecto
@@ -245,6 +246,8 @@ goto MainMenu
 :Opt6Menu
 echo.
 echo Escogiste la opción 6
+echo. 
+echo                -------------------PRESIONE CUALQUIER TECLA PARA IR AL MENÚ PRINCIPAL----------------
 
 :: Poner en pausa la ejecución de comandos del archivo hasta pulsar cualquier tecla
 :: ">nul" -> ocultar texto que sale por defecto
@@ -268,10 +271,6 @@ echo                ╠═══════════╦════╦══
 echo                ║     0     ║ Sí ║     1     ║ No ║    
 echo                ╚═══════════╩════╩═══════════╩════╝    
 echo.
-          
-:: Poner en pausa la ejecución de comandos del archivo hasta pulsar cualquier tecla
-:: ">nul" -> ocultar texto que sale por defecto
-pause>nul
 
 :: FinOpt -> Variable para la opcion del menú principal
 :: set/p -> Asignar valor a la variable
