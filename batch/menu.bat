@@ -115,13 +115,63 @@ goto MainMenu
 
 :Opt1Menu
 
+::             ╔═══════════════════════════════════════════════════════════════════════════════════════════╗
+::             ║ Directorio actual                                                                         ║
+::             ╠═══════════════════════════════════════════════════════════════════════════════════════════╣
+::             ║ c:\Users\kevin\Documents\GitHub\so\batch                                                  ║
+::             ╚═══════════════════════════════════════════════════════════════════════════════════════════╝
+
+::             ╔═══════════════════════════════════════════════════════════════════════════════════════════╗
+::             ║ Directorio actual                                                                         ║
+::             ╠═══════════════════════════════════════════════════════════════════════════════════════════╣
+::             ║ c:\Users\kevin\Documents\GitHub\so\batch\holaaaaaaaaaaaaaaaa                              ║
+::             ╚═══════════════════════════════════════════════════════════════════════════════════════════╝
+
 :: Mostrar encabezado
-echo                ╔═══════════════════╗
-echo                ║ Directorio actual ║        
-echo                ╚═══════════════════╝
 echo.
-echo                 %cd%
 echo.
+echo.
+echo                ╔═══════════════════════════════════════════════════════════════════════════════════════════╗
+echo                ║ Directorio actual                                                                         ║        
+echo                ╠═══════════════════════════════════════════════════════════════════════════════════════════╣
+
+setlocal enabledelayedexpansion
+
+:: Obtener el directorio actual
+set "directorio=%cd%"
+
+:: Calcular el espacio restante para completar la línea
+set "spaces=                                                                                      "
+set /a totalWidth=90
+for /l %%I in (0,1,1000) do (
+    if "!directorio:~%%I,1!"=="" (
+        set /a textWidth=%%I
+        goto DoneCalculating
+    )
+)
+
+:DoneCalculating
+set /a remainingWidth=totalWidth - textWidth
+
+:: Si el directorio es demasiado largo, recórtalo
+if %remainingWidth% lss 0 (
+    set "paddedDirectorio=!directorio:~0,%totalWidth%!"
+    set "remainingWidth=0"
+) else (
+    set "paddedDirectorio=%directorio%"
+)
+
+:: Rellenar con espacios para completar la línea si es necesario
+set "dynamicSpaces=!spaces:~0,%remainingWidth%!"
+
+:: Mostrar el directorio ajustado con el borde derecho
+echo                ║ !paddedDirectorio!!dynamicSpaces!║
+
+endlocal
+
+echo                ╚═══════════════════════════════════════════════════════════════════════════════════════════╝
+echo.
+
 echo                ╔═══════════════════════════════════════════════════════════════════════════════════════════╗
 echo                ║                             CONTENIDO DEL DIRECTORIO                                      ║
 echo                ╠═════════════════════╦═══════════════════╦═════════════════════════════════════════════════╣
