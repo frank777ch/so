@@ -576,11 +576,37 @@ goto Opt6
 
 :Group
 
-echo hola
+setlocal enabledelayedexpansion
 
-pause
+echo                Acciones realizadas:
 
-goto MainMenu
+:: Recorrer todos los archivos del directorio actual
+for %%A in (*) do (
+    :: Obtener la extensión del archivo
+    set "archivo=%%~nxA"
+    set "extension=%%~xA"
+    set "extension=!extension:~1!"
+
+    if /i not "!archivo!"=="%~nx0" (
+
+        if not exist "!extension!" (
+            mkdir "!extension!"
+            echo                Creada carpeta "!extension!"
+        )
+
+        move "%%A" "!extension!\"
+        echo                Movido "!archivo!" a "!extension!\"
+    )
+)
+
+echo                ----------------------------- AGRUPACIÓN REALIAZADA CON ÉXITO -------------------------------
+echo                ----------------- PRESIONE CUALQUIER TECLA PARA VOLVER AL MENÚ ANTERIOR ---------------------
+
+pause>nul
+
+cls
+
+goto Opt6
 
 :ChangeDirect6
 
