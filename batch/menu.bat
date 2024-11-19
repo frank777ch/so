@@ -63,15 +63,12 @@ echo.
 
 :: Poner en pausa la ejecución de comandos del archivo hasta pulsar cualquier tecla
 :: ">nul" -> ocultar texto que sale por defecto
-pause>nul
-
-:: Primero debe presionar cualquier tecla para continuar
-:: Luego escribe su opción
+:: pause>nul
+:: No es necesario lo de arriba
 
 :: MainOpt -> Variable para la opcion del menu principal
 :: set/p -> Asignar valor a la variable
-set/p MainOpt=
-
+set /p "MainOpt=‎               INGRESE SU OPCIÓN AQUÍ: "
 :: Limpiar pantalla
 cls
 
@@ -98,13 +95,14 @@ if %MainOpt%==0 goto Opt0Menu
 
 :: Mensaje en caso de opción inválida
 echo.
-echo                ╔══════════╦════════════════════════════════╗
-echo                ║  __  __  ║         OPCIÓN INVÁLIDA        ║ 
-echo                ║  \ \/ /  ╠════════════════════════════════╣
-echo                ║   \  /   ║ Ha escogido un opción inválida.║
-echo                ║   /  \   ║ Por favor, vuelva a escribir   ║
-echo                ║  /_/\_\  ║ otra opción.                   ║
-echo                ╚══════════╩════════════════════════════════╝
+echo                ╔══════════╦═══════════════════════════════════════════╗
+echo                ║  __  __  ║                OPCIÓN INVÁLIDA            ║ 
+echo                ║  \ \/ /  ╠═══════════════════════════════════════════╣
+echo                ║   \  /   ║ Ha escogido un opción inválida. Por favor ║
+echo                ║   /  \   ║ vuelva a escribir otra opción que esté en ║
+echo                ║  /_/\_\  ║ el menú.                                  ║
+echo                ║          ║ Pulse cualquier tecla para continuar.     ║
+echo                ╚══════════╩═══════════════════════════════════════════╝
 echo.
 
 :: Poner en pausa la ejecución de comandos del archivo hasta pulsar cualquier tecla
@@ -121,28 +119,127 @@ goto MainMenu
 :: Submenús para las opciones
 
 :Opt1Menu
+
+:: Mostrar encabezado
+echo                ╔═══════════════════╗
+echo                ║ Directorio actual ║        
+echo                ╚═══════════════════╝
 echo.
-echo Escogiste la opción 1
+echo                 %cd%
+echo.
+echo                ╔═══════════════════════════════════════════════════════════════════════════════════╗
+echo                ║                             CONTENIDO DEL DIRECTORIO                              ║
+echo                ╠═════════════════════╦═══════════════════╦═════════════════════════════════════════╣
+echo                ║      FECHA          ║       TAMAÑO      ║              NOMBRE                     ║
+echo                ╠═════════════════════╬═══════════════════╬═════════════════════════════════════════╣
+
+:: Mostrar detalles de archivos y carpetas con formato fijo
+setlocal enabledelayedexpansion
+for /f "tokens=1,2,3*" %%A in ('dir /a:-d /o:d ^| findstr /r "^[0-9]"') do (
+    set "fecha=%%A %%B"
+    set "tamano=%%C"
+    set "nombre=%%D"
+
+    :: Formatear columnas con longitud fija manualmente
+    set "paddedFecha=!fecha!                    "
+    set "paddedTamano=!tamano!                  "
+    set "paddedNombre=!nombre!                                       "
+
+    set "paddedFecha=!paddedFecha:~0,20!"
+    set "paddedTamano=!paddedTamano:~0,18!"
+    set "paddedNombre=!paddedNombre:~0,40!"
+
+    echo                ║ !paddedFecha!║ !paddedTamano!║ !paddedNombre!║
+)
+endlocal
+
+echo                ╚═════════════════════╩═══════════════════╩═════════════════════════════════════════╝
+
+:: Poner en pausa la ejecución de comandos del archivo hasta pulsar cualquier tecla
+:: ">nul" -> ocultar texto que sale por defecto
+pause>nul
+
+:: Limpiar pantalla
+cls
+
+:: Primero debe presionar cualquier tecla para continuar
+:: Luego se le redirige al menú principal
+goto MainMenu
 
 :Opt2Menu
 echo.
 echo Escogiste la opción 2
 
+:: Poner en pausa la ejecución de comandos del archivo hasta pulsar cualquier tecla
+:: ">nul" -> ocultar texto que sale por defecto
+pause>nul
+
+:: Limpiar pantalla
+cls
+
+:: Primero debe presionar cualquier tecla para continuar
+:: Luego se le redirige al menú principal
+goto MainMenu
+
 :Opt3Menu
 echo.
 echo Escogiste la opción 3
+
+:: Poner en pausa la ejecución de comandos del archivo hasta pulsar cualquier tecla
+:: ">nul" -> ocultar texto que sale por defecto
+pause>nul
+
+:: Limpiar pantalla
+cls
+
+:: Primero debe presionar cualquier tecla para continuar
+:: Luego se le redirige al menú principal
+goto MainMenu
 
 :Opt4Menu
 echo.
 echo Escogiste la opción 4
 
+:: Poner en pausa la ejecución de comandos del archivo hasta pulsar cualquier tecla
+:: ">nul" -> ocultar texto que sale por defecto
+pause>nul
+
+:: Limpiar pantalla
+cls
+
+:: Primero debe presionar cualquier tecla para continuar
+:: Luego se le redirige al menú principal
+goto MainMenu
+
 :Opt5Menu
 echo.
 echo Escogiste la opción 5
 
+:: Poner en pausa la ejecución de comandos del archivo hasta pulsar cualquier tecla
+:: ">nul" -> ocultar texto que sale por defecto
+pause>nul
+
+:: Limpiar pantalla
+cls
+
+:: Primero debe presionar cualquier tecla para continuar
+:: Luego se le redirige al menú principal
+goto MainMenu
+
 :Opt6Menu
 echo.
 echo Escogiste la opción 6
+
+:: Poner en pausa la ejecución de comandos del archivo hasta pulsar cualquier tecla
+:: ">nul" -> ocultar texto que sale por defecto
+pause>nul
+
+:: Limpiar pantalla
+cls
+
+:: Primero debe presionar cualquier tecla para continuar
+:: Luego se le redirige al menú principal
+goto MainMenu
 
 :: Submenú para salir del programa
 :Opt0Menu
@@ -185,13 +282,14 @@ if %FinOpt%==1 goto MainMenu
 
 :: Mensaje en caso de opción inválida
 echo.
-echo                ╔══════════╦════════════════════════════════╗
-echo                ║  __  __  ║         OPCIÓN INVÁLIDA        ║ 
-echo                ║  \ \/ /  ╠════════════════════════════════╣
-echo                ║   \  /   ║ Ha escogido un opción inválida.║
-echo                ║   /  \   ║ Por favor, vuelva a escribir   ║
-echo                ║  /_/\_\  ║ otra opción.                   ║
-echo                ╚══════════╩════════════════════════════════╝
+echo                ╔══════════╦═══════════════════════════════════════════╗
+echo                ║  __  __  ║                OPCIÓN INVÁLIDA            ║ 
+echo                ║  \ \/ /  ╠═══════════════════════════════════════════╣
+echo                ║   \  /   ║ Ha escogido un opción inválida. Por favor ║
+echo                ║   /  \   ║ vuelva a escribir otra opción que esté en ║
+echo                ║  /_/\_\  ║ el menú.                                  ║
+echo                ║          ║ Pulse cualquier tecla para continuar.     ║
+echo                ╚══════════╩═══════════════════════════════════════════╝
 echo.
 
 :: Poner en pausa la ejecución de comandos del archivo hasta pulsar cualquier tecla
