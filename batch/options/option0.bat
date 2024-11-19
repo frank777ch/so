@@ -27,20 +27,11 @@ set /p "FinOpt=‎               INGRESE SU OPCIÓN: "
 :: Limpiar pantalla
 cls
 
-:: Observación: Las etiquetas no deben ir entre las sentencias if.
-:: INCORRECTO           ║       CORRECTO
-:: if ***** goto x      ║       if ***** goto x
-:: :x                   ║       if ***** goto y
-:: echo ****            ║       :x
-:: if ***** goto y      ║       echo ****
-:: :y                   ║       :y
-:: echo ****            ║       echo ****
-
 :: Condición afirmación de salida
 if %FinOpt%==0 exit
 
 :: Condición regresar al menú principal
-if %FinOpt%==1 call "..\menu.bat"
+if %FinOpt%==1 call menu.bat
 
 :: Mensaje en caso de opción inválida
 echo.

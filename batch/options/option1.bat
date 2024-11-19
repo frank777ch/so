@@ -123,6 +123,6 @@ cls
 
 :: Primero debe presionar cualquier tecla para continuar
 :: Luego se le redirige al menú principal
-call "..\menu.bat"
+call menu.bat
 
 :: Fin

@@ -101,7 +101,7 @@ cls
 if %FinOpt2%==0 goto ChangeDirect
 
 :: Condición regresar al menú principal
-if %FinOpt2%==1 call "..\menu.bat"
+if %FinOpt2%==1 call menu.bat
 
 :: Mensaje en caso de opción inválida
 echo.
@@ -198,6 +198,6 @@ cls
 
 :: Primero debe presionar cualquier tecla para continuar
 :: Luego se le redirige al menú principal
-call "..\menu.bat"
+call menu.bat
 
 :: Fin
