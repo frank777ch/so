@@ -473,6 +473,12 @@ endlocal
 echo                ╚═══════════════════════════════════════════════════════════════════════════════════════════╝
 echo.
 
+:: Obtener el nombre del directorio actual
+for %%A in (.) do set "nombreActual=%%~nxA"
+
+:: Obtener el nombre del directorio padre
+for %%A in (..) do set "nombrePadre=%%~nxA"
+
 echo                ╔═══════════════════════════════════════════════════════════════════════════════════════════╗
 echo                ║                             CONTENIDO DEL DIRECTORIO                                      ║
 echo                ╠═════════════════════╦═══════════════════╦═════════════════════════════════════════════════╣
@@ -481,15 +487,27 @@ echo                ╠═══════════════════
 
 :: Mostrar detalles de archivos y carpetas con formato fijo
 setlocal enabledelayedexpansion
-for /f "tokens=1,2,3*" %%A in ('dir /a:-d /o:d ^| findstr /r "^[0-9]"') do (
+for /f "tokens=1,2,3*" %%A in ('dir /a /o:d ^| findstr /r "^[0-9]"') do (
     set "fecha=%%A %%B"
     set "tamano=%%C"
     set "nombre=%%D"
 
+    if "%%C" == "<DIR>" (
+        set "tamano=<DIR>"
+    )
+
+    if "%%D" == "." (
+        set "nombre=!nombreActual! (Directorio actual)"
+    )
+
+    if "%%D" == ".." (
+        set "nombre=!nombrePadre! (Directorio Padre)"
+    )
+
     :: Formatear columnas con longitud fija manualmente
     set "paddedFecha=!fecha!                    "
     set "paddedTamano=!tamano!                  "
-    set "paddedNombre=!nombre!                                          "
+    set "paddedNombre=!nombre!                                               "
 
     set "paddedFecha=!paddedFecha:~0,20!"
     set "paddedTamano=!paddedTamano:~0,18!"
