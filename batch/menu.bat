@@ -115,17 +115,19 @@ goto MainMenu
 
 :Opt1Menu
 
-::             ╔═══════════════════════════════════════════════════════════════════════════════════════════╗
-::             ║ Directorio actual                                                                         ║
-::             ╠═══════════════════════════════════════════════════════════════════════════════════════════╣
-::             ║ c:\Users\kevin\Documents\GitHub\so\batch                                                  ║
-::             ╚═══════════════════════════════════════════════════════════════════════════════════════════╝
+:: VISTA PREVIA
+::
+::                  ╔═══════════════════════════════════════════════════════════════════════════════════════════╗
+::                  ║ Directorio actual                                                                         ║
+::                  ╠═══════════════════════════════════════════════════════════════════════════════════════════╣
+::                  ║ c:\Users\kevin\Documents\GitHub\so\batch                                                  ║
+::                  ╚═══════════════════════════════════════════════════════════════════════════════════════════╝
 
-::             ╔═══════════════════════════════════════════════════════════════════════════════════════════╗
-::             ║ Directorio actual                                                                         ║
-::             ╠═══════════════════════════════════════════════════════════════════════════════════════════╣
-::             ║ c:\Users\kevin\Documents\GitHub\so\batch\holaaaaaaaaaaaaaaaa                              ║
-::             ╚═══════════════════════════════════════════════════════════════════════════════════════════╝
+::                  ╔═══════════════════════════════════════════════════════════════════════════════════════════╗
+::                  ║ Directorio actual                                                                         ║
+::                  ╠═══════════════════════════════════════════════════════════════════════════════════════════╣
+::                  ║ c:\Users\kevin\Documents\GitHub\so\batch\holaaaaaaaaaaaaaaaa                              ║
+::                  ╚═══════════════════════════════════════════════════════════════════════════════════════════╝
 
 :: Mostrar encabezado
 echo.
@@ -172,6 +174,22 @@ endlocal
 echo                ╚═══════════════════════════════════════════════════════════════════════════════════════════╝
 echo.
 
+:: VISTA PREVIA
+::
+::                  ╔═══════════════════════════════════════════════════════════════════════════════════════════╗
+::                  ║                             CONTENIDO DEL DIRECTORIO                                      ║
+::                  ╠═════════════════════╦═══════════════════╦═════════════════════════════════════════════════╣
+::                  ║      FECHA          ║       TAMAÑO      ║              NOMBRE                             ║
+::                  ╠═════════════════════╬═══════════════════╬═════════════════════════════════════════════════╣
+::                  ║ 18/11/2024 17:39    ║ 0                 ║ prueba1.txt                                     ║
+::                  ║ 18/11/2024 17:39    ║ 0                 ║ prueba2.txt                                     ║
+::                  ║ 18/11/2024 21:54    ║ 0                 ║ hola.txt                                        ║
+::                  ║ 18/11/2024 22:00    ║ 2,540             ║ prueba.bat                                      ║
+::                  ║ 19/11/2024 06:27    ║ 3,423             ║ option2.bat                                     ║
+::                  ║ 19/11/2024 09:33    ║ 26,280            ║ menu.bat                                        ║
+::                  ╚═════════════════════╩═══════════════════╩═════════════════════════════════════════════════╝
+
+
 echo                ╔═══════════════════════════════════════════════════════════════════════════════════════════╗
 echo                ║                             CONTENIDO DEL DIRECTORIO                                      ║
 echo                ╠═════════════════════╦═══════════════════╦═════════════════════════════════════════════════╣
@@ -214,22 +232,151 @@ goto MainMenu
 
 :Opt2Menu
 
-:: Mostrar encabezado
-echo                ╔══════════════════════════════╗
-echo                ║ Cambiar el Directorio actual ║
-echo                ╚══════════════════════════════╝
+::                ╔═══════════════════════════════════════════════════════════════════════════════════════════╗
+::                ║ Tu DIRECTORIO ACTUAL es                                                                   ║
+::                ╠═══════════════════════════════════════════════════════════════════════════════════════════╣
+::                ║ c:\Users\kevin\Documents\GitHub\so\batch                                                  ║
+::                ╚═══════════════════════════════════════════════════════════════════════════════════════════╝
+
+::                ╔═════════════════════════════════╗    
+::                ║ ¿QUIERE CAMBIAR DE DIRECTORIO?  ║    
+::                ╠═══════════╦════╦═══════════╦════╣    
+::                ║     0     ║ Sí ║     1     ║ No ║    
+::                ╚═══════════╩════╩═══════════╩════╝
+
+::                INGRESE LA RUTA AL CUAL DESEA DIRIGIRSE: c:\User\kevin
+
+::                ----------------------------- CAMBIO REALIZADO CON ÉXITO ------------------------------------
+::
+::                ╔═══════════════════════════════════════════════════════════════════════════════════════════╗
+::                ║ Tu DIRECTORIO ACTUAL ahora es                                                             ║
+::                ╠═══════════════════════════════════════════════════════════════════════════════════════════╣
+::                ║ c:\Users\kevin\Documents\GitHub\so\batch                                                  ║
+::                ╚═══════════════════════════════════════════════════════════════════════════════════════════╝
+
+::                ------------------ PRESIONE CUALQUIER TECLA PARA IR AL MENÚ PRINCIPAL -----------------------
+
 echo.
-echo                 %cd%
+echo.
+echo.
+echo                ╔═══════════════════════════════════════════════════════════════════════════════════════════╗
+echo                ║ Tu DIRECTORIO ACTUAL es                                                                   ║        
+echo                ╠═══════════════════════════════════════════════════════════════════════════════════════════╣
+
+setlocal enabledelayedexpansion
+
+:: Obtener el directorio actual
+set "directorio=%cd%"
+
+:: Calcular el espacio restante para completar la línea
+set "spaces=                                                                                      "
+set /a totalWidth=90
+for /l %%I in (0,1,1000) do (
+    if "!directorio:~%%I,1!"=="" (
+        set /a textWidth=%%I
+        goto DoneCalculating
+    )
+)
+
+:DoneCalculating
+set /a remainingWidth=totalWidth - textWidth
+
+:: Si el directorio es demasiado largo, recórtalo
+if %remainingWidth% lss 0 (
+    set "paddedDirectorio=!directorio:~0,%totalWidth%!"
+    set "remainingWidth=0"
+) else (
+    set "paddedDirectorio=%directorio%"
+)
+
+:: Rellenar con espacios para completar la línea si es necesario
+set "dynamicSpaces=!spaces:~0,%remainingWidth%!"
+
+:: Mostrar el directorio ajustado con el borde derecho
+echo                ║ !paddedDirectorio!!dynamicSpaces!║
+
+endlocal
+
+echo                ╚═══════════════════════════════════════════════════════════════════════════════════════════╝
 echo.
 
-set /p "ruta=‎               INGRESE LA RUTA AL CUAL DESEA DIRIGIRSE: "
+echo                ╔═════════════════════════════════╗    
+echo                ║ ¿QUIERE CAMBIAR DE DIRECTORIO?  ║    
+echo                ╠═══════════╦════╦═══════════╦════╣    
+echo                ║     0     ║ Sí ║     1     ║ No ║    
+echo                ╚═══════════╩════╩═══════════╩════╝
+
+:: FinOpt -> Variable para la opcion del menú principal
+:: set/p -> Asignar valor a la variable
+set/p FinOpt=
 
 :: Limpiar pantalla
 cls
 
+:: Condición afirmación de cambio
+if %FinOpt%==0 goto ChangeDirect
+
+:: Condición regresar al menú principal
+if %FinOpt%==1 goto MainMenu
+
+:ChangeDirect
+
+set /p "ruta=‎               INGRESE LA RUTA AL CUAL DESEA DIRIGIRSE: "
+
 cd /d "%ruta%"
 
-goto Opt1Menu
+:: Limpiar pantalla
+cls
+
+echo.
+echo                ----------------------------- CAMBIO REALIZADO CON ÉXITO ------------------------------------
+echo.
+
+echo.
+echo.
+echo.
+echo                ╔═══════════════════════════════════════════════════════════════════════════════════════════╗
+echo                ║ Tu DIRECTORIO ACTUAL ahora es                                                                   ║        
+echo                ╠═══════════════════════════════════════════════════════════════════════════════════════════╣
+
+setlocal enabledelayedexpansion
+
+:: Obtener el directorio actual
+set "directorio=%cd%"
+
+:: Calcular el espacio restante para completar la línea
+set "spaces=                                                                                      "
+set /a totalWidth=90
+for /l %%I in (0,1,1000) do (
+    if "!directorio:~%%I,1!"=="" (
+        set /a textWidth=%%I
+        goto DoneCalculating
+    )
+)
+
+:DoneCalculating
+set /a remainingWidth=totalWidth - textWidth
+
+:: Si el directorio es demasiado largo, recórtalo
+if %remainingWidth% lss 0 (
+    set "paddedDirectorio=!directorio:~0,%totalWidth%!"
+    set "remainingWidth=0"
+) else (
+    set "paddedDirectorio=%directorio%"
+)
+
+:: Rellenar con espacios para completar la línea si es necesario
+set "dynamicSpaces=!spaces:~0,%remainingWidth%!"
+
+:: Mostrar el directorio ajustado con el borde derecho
+echo                ║ !paddedDirectorio!!dynamicSpaces!║
+
+endlocal
+
+echo                ╚═══════════════════════════════════════════════════════════════════════════════════════════╝
+echo.
+
+echo                ------------------ PRESIONE CUALQUIER TECLA PARA IR AL MENÚ PRINCIPAL -----------------------
 
 :: Poner en pausa la ejecución de comandos del archivo hasta pulsar cualquier tecla
 :: ">nul" -> ocultar texto que sale por defecto
@@ -243,6 +390,7 @@ cls
 goto MainMenu
 
 :Opt3Menu
+
 echo.
 echo Escogiste la opción 3
 echo. 
