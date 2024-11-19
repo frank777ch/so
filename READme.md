@@ -27,7 +27,7 @@ El control de acceso a la carpeta debe estar desactivado para que el programa pu
 3. Haz clic en **Administrar la protección contra ransomware**.
 4. Desactiva la opción **Controlar el acceso a la carpeta**.
 
-![Protección contra ransomware](C:\Users\kevin\Documents\GitHub\so\img\control.png) <!-- Cambia "ruta-a-la-imagen.png" por la ubicación real si subes esta imagen -->
+![Protección contra ransomware](.\img\control.png) <!-- Cambia "ruta-a-la-imagen.png" por la ubicación real si subes esta imagen -->
 
 ### 2. **Agregar WinRAR al PATH de las Variables de Entorno**
 El programa requiere que WinRAR esté configurado en las variables de entorno para utilizar sus funciones de compresión. Sigue estos pasos para configurarlo:
