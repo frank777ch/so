@@ -190,7 +190,7 @@ for /f "tokens=1,2,3*" %%A in ('dir /a:-d /o:d ^| findstr /r "^[0-9]"') do (
     :: Formatear columnas con longitud fija manualmente
     set "paddedFecha=!fecha!                    "
     set "paddedTamano=!tamano!                  "
-    set "paddedNombre=!nombre!                                          "
+    set "paddedNombre=!nombre!                                                "
 
     set "paddedFecha=!paddedFecha:~0,20!"
     set "paddedTamano=!paddedTamano:~0,18!"
@@ -316,6 +316,8 @@ echo.
 echo.
 echo.
 set /p "ruta=‎               INGRESE LA RUTA AL CUAL DESEA DIRIGIRSE: "
+
+cls
 
 if exist "%ruta%" (
 
@@ -587,11 +589,93 @@ echo.
 echo.
 set /p "ruta=‎               INGRESE LA RUTA AL CUAL DESEA DIRIGIRSE: "
 
-cd /d "%ruta%"
+if exist "%ruta%" (
 
+    cd /d "%ruta%"
+    goto SuccessDir
+
+) else (
+    goto FailDir
+)
+
+:: Limpiar pantalla
 cls
 
-goto Opt6
+:FailDir
+
+:: Mensaje en caso de ruta inválida
+echo.
+echo.
+echo.
+echo                ╔══════════╦═══════════════════════════════════════════╗
+echo                ║  __  __  ║             RUTA NO ENCONTRADA            ║ 
+echo                ║  \ \/ /  ╠═══════════════════════════════════════════╣
+echo                ║   \  /   ║ Ha colocado una ruta inválida. Por favor  ║
+echo                ║   /  \   ║ vuelva a escribir otra ruta que sí exista ║
+echo                ║  /_/\_\  ║ Pulse cualquier tecla para continuar.     ║
+echo                ╚══════════╩═══════════════════════════════════════════╝
+echo.
+
+:: Poner en pausa la ejecución de comandos del archivo hasta pulsar cualquier tecla
+:: ">nul" -> ocultar texto que sale por defecto
+pause>nul
+
+:: Limpiar pantalla
+cls
+
+:: Primero debe presionar cualquier tecla para continuar
+:: Luego se le redirige al menú principal
+goto ChangeDirect
+
+:SuccessDir
+
+echo.
+echo.
+echo.
+echo                ----------------------------- CAMBIO REALIZADO CON ÉXITO ------------------------------------
+echo.
+
+echo                ╔═══════════════════════════════════════════════════════════════════════════════════════════╗
+echo                ║ Tu DIRECTORIO ACTUAL ahora es                                                             ║        
+echo                ╠═══════════════════════════════════════════════════════════════════════════════════════════╣
+
+setlocal enabledelayedexpansion
+
+:: Obtener el directorio actual
+set "directorio=%cd%"
+
+:: Calcular el espacio restante para completar la línea
+set "spaces=                                                                                      "
+set /a totalWidth=90
+for /l %%I in (0,1,1000) do (
+    if "!directorio:~%%I,1!"=="" (
+        set /a textWidth=%%I
+        goto DoneCalculating
+    )
+)
+
+:DoneCalculating
+set /a remainingWidth=totalWidth - textWidth
+
+:: Si el directorio es demasiado largo, recórtalo
+if %remainingWidth% lss 0 (
+    set "paddedDirectorio=!directorio:~0,%totalWidth%!"
+    set "remainingWidth=0"
+) else (
+    set "paddedDirectorio=%directorio%"
+)
+
+:: Rellenar con espacios para completar la línea si es necesario
+set "dynamicSpaces=!spaces:~0,%remainingWidth%!"
+
+:: Mostrar el directorio ajustado con el borde derecho
+echo                ║ !paddedDirectorio!!dynamicSpaces!║
+
+endlocal
+
+echo                ╚═══════════════════════════════════════════════════════════════════════════════════════════╝
+echo.
+
 
 :: Fin
 
