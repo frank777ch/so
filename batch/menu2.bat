@@ -425,6 +425,57 @@ goto MainMenu
 
 :Opt4
 
+:: Mensaje inicial para la opción 4
+echo.
+echo                ╔══════════════════════════════════════════════════════════════════════════╗
+echo                ║                          OPCIÓN 4: RENOMBRAR ARCHIVO                     ║
+echo                ╚══════════════════════════════════════════════════════════════════════════╝
+echo.
+
+:: Solicitar el nombre del archivo a renombrar
+set /p "OldFileName=‎‎                Ingrese el nombre del archivo a renombrar (con extensión): "
+
+:: Verificar si el archivo existe en el directorio actual
+if not exist "%OldFileName%" (
+    echo.
+    echo                ╔══════════════════════════════════════════════════════════════════════╗
+    echo                ║             ERROR: El archivo no existe en el directorio actual.     ║
+    echo                ╚══════════════════════════════════════════════════════════════════════╝
+    echo.
+    pause>nul
+    cls
+    goto Opt4
+)
+
+:: Solicitar el nuevo nombre para el archivo
+set /p "NewFileName=‎‎                Ingrese el nuevo nombre para el archivo (con extensión): "
+
+:: Renombrar el archivo
+ren "%OldFileName%" "%NewFileName%"
+if errorlevel 1 (
+    echo.
+    echo                ╔══════════════════════════════════════════════════════════════════════╗
+    echo                ║             ERROR: No se pudo renombrar el archivo.                 ║
+    echo                ╚══════════════════════════════════════════════════════════════════════╝
+    echo.
+    pause>nul
+    cls
+    exit /b
+)
+
+:: Confirmar que el archivo fue renombrado exitosamente
+echo.
+echo                ╔════════════════════════════════════════════════════════════════════════╗
+echo                ║        ÉXITO: El archivo ha sido renombrado correctamente.             ║
+echo                ╚════════════════════════════════════════════════════════════════════════╝
+echo.
+
+:: Pausa para que el usuario vea el mensaje
+pause>nul
+
+:: Regresar al menú principal
+goto MainMenu
+
 :Opt5
 
 :: Inicio
