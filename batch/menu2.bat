@@ -589,6 +589,8 @@ echo.
 echo.
 set /p "ruta=‎               INGRESE LA RUTA AL CUAL DESEA DIRIGIRSE: "
 
+cls
+
 if exist "%ruta%" (
 
     cd /d "%ruta%"
@@ -625,7 +627,7 @@ cls
 
 :: Primero debe presionar cualquier tecla para continuar
 :: Luego se le redirige al menú principal
-goto ChangeDirect
+goto ChangeDirect6
 
 :SuccessDir
 
@@ -675,7 +677,14 @@ endlocal
 
 echo                ╚═══════════════════════════════════════════════════════════════════════════════════════════╝
 echo.
+echo                ----------------- PRESIONE CUALQUIER TECLA PARA VOLVER AL MENÚ ANTERIOR ---------------------
 
+pause>nul
+
+:: Limpiar pantalla
+cls
+
+goto Opt6
 
 :: Fin
 
