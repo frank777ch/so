@@ -423,6 +423,50 @@ goto MainMenu
 
 :Opt3
 
+@echo off
+:inicio
+cls
+echo Moviendo estos archivos ...
+echo.
+echo Origen: [%CD%]
+echo.
+dir /b
+echo ===============================================================
+set /p path=Destino: 
+echo ===============================================================
+
+:verificarpath
+if exist "%path%\" (
+    echo "Es una carpeta válida"
+    copy * "%path%" /y
+    echo "Archivos copiados correctamente."
+    goto fin
+) else if exist "%path%" (
+    echo "Es un archivo, no un directorio"
+    choice /c SN /m "¿Reingresar ruta? (S/N)"
+    goto comprobarReingresarRuta
+) else (
+    echo "No existe la ruta"
+    choice /c SN /m "¿Reingresar ruta? (S/N)"
+    goto comprobarReingresarRuta
+)
+
+:comprobarReingresarRuta
+if %errorlevel%==1 (
+    goto inicio
+) else (
+    echo "Finalizando el programa..."
+    goto fin
+)
+
+:fin
+echo.
+echo ===============================================================
+echo "Proceso terminado. ¡Gracias por usar el programa!"
+pause>nul
+
+goto MainMenu
+
 :Opt4
 
 :: Mensaje inicial para la opción 4
